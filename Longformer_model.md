@@ -24,3 +24,4 @@ kaggle의 base 코드 참고(1개의 lonformer model CV 0.633 / 2개의 CV 0.690
 ### Reference
 1. 논문 리뷰1 : https://pko89403.github.io/post/longformer/
 2. 논문 리뷰2 : https://medium.com/@eyfydsyd97/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0-longformer-the-long-document-transformer-e9ade1980536
+3. longformer model github : https://github.com/allenai/longformer 
