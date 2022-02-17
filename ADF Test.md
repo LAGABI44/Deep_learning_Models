@@ -37,6 +37,7 @@ y _t=c+βt+αy_{t−1}+ϕ _1∇y _{t−1}+...+ϕ_p∇y_{t−p}+e_t
 - [유의확률](https://ko.wikipedia.org/wiki/%EC%9C%A0%EC%9D%98_%ED%99%95%EB%A5%A0), [p-value](https://yeomko.tistory.com/37)
 ![p-value](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb23NHy%2FbtqDA5oG65i%2FQUZe3SOdsocNOZHo6afm41%2Fimg.png)
 - p 값이 0에 가까울수록 귀무가설의 설득력은 점점 약해지고 이를 기각하고 우리가 입증하고 싶은 대립 가설의 설득력은 점점 강해지게 됨
+- p-value가 1에 가깝다고 해서 무조건적으로 귀무가설이 옳다는 직접적인 증거는 아니지만 귀무가설을 기각할 수 없게 되므로 안정적인 시계열이라고 판단하기 어려움
 
 ***
 ## 4. statsmodels 패키지
@@ -56,3 +57,35 @@ def augmented_dickey_fuller_test(timeseries):
         dfoutput['Critical Value (%s)' % key] = value
     print(dfoutput)
 ```
+```
+augmented_dickey_fuller_test(ts1)
+
+# 결과
+Results of Dickey-Fuller Test:
+Test Statistic                   -4.444805
+p-value                           0.000247
+#Lags Used                       20.000000
+Number of Observations Used    3629.000000
+Critical Value (1%)              -3.432153
+Critical Value (5%)              -2.862337
+Critical Value (10%)             -2.567194
+dtype: float64
+```
+=> ts1(Daily Minimum Temperatures in Melbourne)의 p-value는 거의 0에 가깝게 나타남   
+  따라서 이 귀무가설은 기각되고, 이 시계열은 안정적 시계열이라는 대립가설이 채택됨   
+```
+augmented_dickey_fuller_test(ts2)
+
+# 결과
+Results of Dickey-Fuller Test:
+Test Statistic                   0.815369
+p-value                          0.991880
+#Lags Used                      13.000000
+Number of Observations Used    130.000000
+Critical Value (1%)             -3.481682
+Critical Value (5%)             -2.884042
+Critical Value (10%)            -2.578770
+dtype: float64
+```
+=> ts2(International airline passengers)의 p-value는 거의 1에 가깝게 나타남   
+  따라서  귀무가설을 기각할 수는 없게 되었으므로 이 시계열이 안정적인 시계열이라고 말할 수 없음   
